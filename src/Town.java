@@ -10,6 +10,7 @@ public class Town
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private boolean lookedForTreasure;
 
     //Constructor
     /**
@@ -72,7 +73,7 @@ public class Town
                 hunter.removeItemFromKit(item);
                 printMessage += "\nUnfortunately, your " + item + " broke.";
             }
-
+            lookedForTreasure = false;
             return true;
         }
 
@@ -129,6 +130,49 @@ public class Town
         }
     }
 
+    public void findTreasure () {
+        if (lookedForTreasure)
+        {
+
+            printMessage = "There is nothing else to search for here, try looking in the next town!";
+        }
+        else
+        {
+            lookedForTreasure = true;
+            System.out.println("You search high and low for something valuable, after looking through every nook and cranny;");
+            int chanceToFindTreasure = (int) (Math.random() * 4 + 1);
+            if (chanceToFindTreasure == 1)
+            {
+                printMessage = "You find zilch.";
+            }
+            if (chanceToFindTreasure == 2)
+            {
+                printMessage = "You find the Monkey's Bottom.";
+                if (!hunter.addItem("Monkey's Bottom")) {
+                    printMessage += " You already have that treasure, so you leave it in the cave.";
+                }
+            }
+            if (chanceToFindTreasure == 3)
+            {
+                printMessage = "You find the Monkey's Middle.";
+                if (!hunter.addItem("Monkey's Middle")) {
+                    printMessage += " You already have that treasure, so you leave it in the cave.";
+                }
+            }
+            if (chanceToFindTreasure == 4)
+            {
+                printMessage = " You find the Monkey's Top.";
+                if (!hunter.addItem("Monkey's Top")) {
+                    printMessage += "You already have that treasure, so you leave it in the cave.";
+                }
+            }
+
+            if (((hunter.hasItemInKit("Monkey's Top")) && (hunter.hasItemInKit("Monkey's Bottom"))) && (hunter.hasItemInKit("Monkey's Middle")))
+            {
+                System.out.println("Congratulations! You found all three treasures " + hunter.getHunterName() + ", and you won!");
+            }
+        }
+    }
     public String toString()
     {
         return "This nice little town is surrounded by " + terrain.getTerrainName() + ".";
@@ -173,4 +217,6 @@ public class Town
         double rand = Math.random();
         return (rand < 0.5);
     }
+
+
 }
