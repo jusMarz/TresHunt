@@ -121,7 +121,11 @@ public class Town
                 printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
                 printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
                 hunter.changeGold(-1 * goldDiff);
+                if (hunter.getGold()>=0){
+                    printMessage += "\nNice job!\nYou're bleeding out after the brawl and they took all your money.\nBetter luck next time"+hunter.getHunterName()+"\nGAME OVER!";
+                }
             }
+
         }
     }
 

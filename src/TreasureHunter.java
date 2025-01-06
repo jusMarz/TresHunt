@@ -12,8 +12,14 @@ public class TreasureHunter
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean endGame = false;
 
     //Constructor
+
+    public void EndGame() {
+        endGame = true;
+    }
+
     /**
      * Constructs the Treasure Hunter game.
      */
@@ -99,7 +105,7 @@ public class TreasureHunter
         Scanner scanner = new Scanner(System.in);
         String choice = "";
 
-        while (!(choice.equals("X") || choice.equals("x")))
+        while (!(choice.equals("X") || choice.equals("x"))&&!endGame)
         {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
