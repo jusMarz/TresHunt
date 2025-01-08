@@ -128,7 +128,7 @@ public class Town
                 printMessage += "\nYou won the brawl and receive " +  100 + " gold.";
                 hunter.changeGold(100);
             }
-            if (Math.random() > noTroubleChance)
+            else if (Math.random() > noTroubleChance)
             {
                 printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
                 printMessage += "\nYou won the brawl and receive " +  goldDiff + " gold.";
@@ -139,7 +139,7 @@ public class Town
                 printMessage += "That'll teach you to go lookin' fer trouble in MY town! Now pay up!";
                 printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
                 hunter.changeGold(-1 * goldDiff);
-                if (hunter.getGold()>=0){
+                if (hunter.getGold()<=0){
                     printMessage += "\nNice job!\nYou're bleeding out after the brawl and they took all your money.\nBetter luck next time"+hunter.getHunterName()+"\nGAME OVER!";
                 }
             }
