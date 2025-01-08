@@ -9,7 +9,7 @@ public class Town
     private Shop shop;
     private Terrain terrain;
     private String printMessage;
-    private boolean toughTown;
+    private String toughTown;
     private boolean lookedForTreasure;
 
     //Constructor
@@ -30,7 +30,14 @@ public class Town
         printMessage = "";
 
         // higher toughness = more likely to be a tough town
-        toughTown = (Math.random() < toughness);
+        if (toughness == -1)
+        {
+            toughTown = "cheat";
+        }
+        else if (Math.random() < toughness)
+        {
+            toughTown = "tough";
+        }
     }
 
     public String getLatestNews()
@@ -47,7 +54,7 @@ public class Town
         this.hunter = hunter;
         printMessage = "Welcome to town, " + hunter.getHunterName() + ".";
 
-        if (toughTown)
+        if (toughTown.equals("tough"))
         {
             printMessage += "\nIt's pretty rough around here, so watch yourself.";
         }
@@ -94,7 +101,11 @@ public class Town
     public void lookForTrouble()
     {
         double noTroubleChance;
-        if (toughTown)
+        if (toughTown.equals("cheat"))
+        {
+            noTroubleChance = 1;
+        }
+        if (toughTown.equals("tough"))
         {
             noTroubleChance = 0.66;
         }
@@ -111,6 +122,12 @@ public class Town
         {
             printMessage = "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n";
             int goldDiff = (int)(Math.random() * 10) + 1;
+            if (toughTown.equals("cheat"))
+            {
+                printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
+                printMessage += "\nYou won the brawl and receive " +  100 + " gold.";
+                hunter.changeGold(100);
+            }
             if (Math.random() > noTroubleChance)
             {
                 printMessage += "Okay, stranger! You proved yer mettle. Here, take my gold.";
