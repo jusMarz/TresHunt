@@ -11,13 +11,13 @@ public class TreasureHunter
     //Instance variables
     private Town currentTown;
     private Hunter hunter;
-    private String mode;
+    private String mode = "";
     private boolean endGame = false;
 
 
     //Constructor
 
-    public void EndGame() {
+    public void endGame() {
         endGame = true;
     }
 
@@ -119,8 +119,11 @@ public class TreasureHunter
     {
         Scanner scanner = new Scanner(System.in);
         String choice = "";
-
-        while (!(choice.equals("X") || choice.equals("x"))&&!endGame)
+        if ((hunter.hasItemInKit("Monkey's Middle")) && (hunter.hasItemInKit("Monkey's Top")) && (hunter.hasItemInKit("Monkey's Bottom")))
+        {
+            endGame();
+        }
+        while (!endGame)
         {
             System.out.println();
             System.out.println(currentTown.getLatestNews());
@@ -167,6 +170,7 @@ public class TreasureHunter
         else if (choice.equals("X") || choice.equals("x"))
         {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+            endGame();
         }
         else if (choice.equals("H") || choice.equals("h"))
         {
