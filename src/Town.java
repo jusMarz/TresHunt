@@ -38,6 +38,10 @@ public class Town
         {
             toughTown = "tough";
         }
+        else
+        {
+            toughTown = "no";
+        }
     }
 
     public String getLatestNews()
@@ -140,7 +144,9 @@ public class Town
                 printMessage += "\nYou lost the brawl and pay " +  goldDiff + " gold.";
                 hunter.changeGold(-1 * goldDiff);
                 if (hunter.getGold()<=0){
-                    printMessage += "\nNice job!\nYou're bleeding out after the brawl and they took all your money.\nBetter luck next time"+hunter.getHunterName()+"\nGAME OVER!";
+                    printMessage += "\nNice job!\nYou're bleeding out after the brawl and they took all your money.\nBetter luck next time "+hunter.getHunterName()+"!\nGAME OVER!";
+                    System.out.println(printMessage);
+                    TreasureHunter.endGame();
                 }
             }
 
@@ -187,6 +193,7 @@ public class Town
             if (((hunter.hasItemInKit("Monkey's Top")) && (hunter.hasItemInKit("Monkey's Bottom"))) && (hunter.hasItemInKit("Monkey's Middle")))
             {
                 System.out.println("Congratulations! You found all three treasures " + hunter.getHunterName() + ", and you won!");
+                TreasureHunter.endGame();
             }
         }
     }
