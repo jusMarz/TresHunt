@@ -12,12 +12,13 @@ public class TreasureHunter
     private Town currentTown;
     private Hunter hunter;
     private String mode = "";
-    private boolean endGame = false;
+    private static boolean endGame = false;
 
 
     //Constructor
 
-    public void endGame() {
+    public static void endGame()
+    {
         endGame = true;
     }
 
@@ -120,10 +121,6 @@ public class TreasureHunter
     {
         Scanner scanner = new Scanner(System.in);
         String choice = "";
-        if ((hunter.hasItemInKit("Monkey's Middle")) && (hunter.hasItemInKit("Monkey's Top")) && (hunter.hasItemInKit("Monkey's Bottom")))
-        {
-            endGame();
-        }
         while (!endGame)
         {
             System.out.println();
